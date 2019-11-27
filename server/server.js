@@ -7,6 +7,7 @@ const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
 
+
 // DB Setup
 const db = 'mongodb://127.0.0.1:27017:auth/auth';
 const config = {
@@ -42,6 +43,12 @@ console.log('Server listening on: ' + port);
     - change directory to C:\Program Files\MongoDB\Server\4.2\bin    
     - run command: "mongod"
     --- to change directory of database use:  mongod --dbpath="C:\data\mongo\db"
+
+    // Parts to node service:
+    1. We have our routes
+    2. set up passport middleware
+    3. controllers to handle the requests
+    4. services handle the passport logic
 
 
 */

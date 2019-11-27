@@ -1,13 +1,22 @@
 const Authentication = require('./controllers/authentication');
-const passportService = require('./services/passport');
 const passport = require('passport');
 
-const requireAuth = passport.authenticate('jwt', { session: false });
+// This looks like it's not used, but inside this sets up passport
+// with strategies in the middleware.
+const passportService = require('./services/passport'); 
+
+// passport tries to make a cookie session, since we're using tokens we are setting session to false.
+// Middleware here
+const requireAuth = passport.authenticate('jwt', { session: false });   
+const requireSignin = passport.authenticate('local', { session: false })
 
 module.exports = function(app) {
 
     app.get('/', requireAuth, function(req, res) { 
         res.send({ hi: 'there' });
     });
+
     app.post('/signup', Authentication.signup);
+    app.post('/signin', requireSignin, Authentication.signin);
+
 }
