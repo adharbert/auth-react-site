@@ -5,14 +5,18 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "debug": "nodemon --inspect server.js"
+    "dev-server": "nodemon server.js",
+    "debug-server": "nodemon --inspect server.js",
+    "dev-client": "cd ../client && npm start",
+    "dev": "concurrently \"npm run dev-server\" \"cd ../client && npm start\"",
+    "dev-debug": "concurrently \"npm run debug-server\" \"cd ../client && npm start\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jwt-simple": "^0.5.6",

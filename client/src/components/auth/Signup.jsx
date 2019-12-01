@@ -8,15 +8,16 @@ class Signup extends Component {
 
     onSubmit = (formProps) => {
         console.log(formProps);
-        this.props.signup(formProps);
+        this.props.signup(formProps, () => {
+            this.props.history.push('/feature');
+        });
     }
 
 
 
     render() {
 
-        const { handleSubmit } = this.props;
-
+        const { handleSubmit, errorMessage } = this.props;
 
         return (
             <form onSubmit={ handleSubmit(this.onSubmit) }>
@@ -38,17 +39,27 @@ class Signup extends Component {
                         autoComplete="none"
                     />
                 </fieldset>
+                { this.props.errorMessage &&
+                    <div>
+                        { errorMessage }
+                    </div>
+                    
+                }
                 <button>Sign Up</button>
             </form>
         )
     }
 }
 
+const mapStateToProps = state => ({
+    errorMessage: state.auth.errorMessage
+});
+
 
 
 
 export default compose(
-    connect(null, actions),
+    connect(mapStateToProps, actions),
     reduxForm({ form: 'signup' })
 )(Signup);
 
