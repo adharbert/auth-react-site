@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import requireAuth from './requireAuth';
+import requireAuth from './HOC/requireAuth';
 
 class Feature extends Component {
     render() {
