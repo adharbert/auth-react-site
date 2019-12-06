@@ -1,4 +1,5 @@
 const Authentication = require('./controllers/authentication');
+const Users = require('./controllers/users');
 const passport = require('passport');
 
 // This looks like it's not used, but inside this sets up passport
@@ -18,5 +19,6 @@ module.exports = function(app) {
 
     app.post('/api/signup', Authentication.signup);
     app.post('/api/signin', requireSignin, Authentication.signin);
+    app.get('/api/users', Users.getusers);
 
 }
