@@ -1,89 +1,62 @@
 const faker = require('faker');
-
-/*
-const UsersDts = {
-    userList: [],
-    function() {
-        for(i = 0; i < 10; i++) {
-            this.userList.push({
-                id: i+1,
-                firstName: faker.name.firstName(),
-                lastName: faker.name.lastName(),
-                phone: faker.phone.phoneNumber(),
-                state: faker.address.stateAbbr()
-            });            
-        }
-    }    
-}
-
-UsersDts.proto
-
-
-class UserDts {
-    constructor() {
-        this.userList = [];
-        for(i = 0; i < 10; i++) {
-            this.userList.push({
-                id: i+1,
-                firstName: faker.name.firstName(),
-                lastName: faker.name.lastName(),
-                phone: faker.phone.phoneNumber(),
-                state: faker.address.stateAbbr()
-            });            
-        }
-    }
-
-    getById(id) {
-        return this.userList.find(obj => obj.id === id);
-    }
-
-    getAll() {
-        return this.userList;
-    }
-
-}
-
-
-function UserDts() {
-    this.userList = [];
-    for(i = 0; i < 10; i++) {
-        this.userList.push({
-            id: i+1,
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            phone: faker.phone.phoneNumber(),
-            state: faker.address.stateAbbr()
-        }); 
-    }
-
-    UserDts.getAll = function() {
-        return this.userList;
-    };
-}
-
-UserDts.prototype.getById = function(id) {
-    return this.userList.find(obj => obj.id === id);
-};
-
-*/
-
-let UserDts = function() {
-    this.userList = [];
-    console.log('Hello!');
-    for(let i = 0; i < 10; i++) {
-        console.log(`Counter: ${i}`);
-        this.userList.push({
-            id: i+1,
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            phone: faker.phone.phoneNumber(),
-            state: faker.address.stateAbbr()
-        }); 
-    }
-    let getAll = function GetAll() {
-        return this.userList;
+let nextId = 0
+class UserModel {
+    constructor(firstName, lastName, phone, state) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.phone = phone
+        this.state = state
+        this.id = nextId++
+        userModels.push(this)
     }
 }
 
+// class UserRepository {
+//     constructor() {
+//         this.userModels = []
+//     }
+//     getById(id) {
+//         return this.userModels.find(u => u.id === id)
+//     }
+//     getAll() {
+//         return this.userModels
+//     }
+// }
 
-exports = module.exports = UserDts;
+//module.exports = new UserRepository()
+
+let userModels = []
+const createFake = () => new UserModel(faker.name.firstName(), faker.name.lastName(), faker.phone.phoneNumber(), faker.address.stateAbbr())
+const getAll = () => userModels
+const getById = (id) => userModels.find(u => u.id === id)
+
+Array.from(new Array(20)).forEach(createFake)
+
+module.exports = {
+    createFake,
+    getAll,
+    getById,
+    UserModel 
+}
+
+// let UserDts = function() {
+//     this.userList = [];
+//     console.log('Hello!');
+//     for(let i = 0; i < 10; i++) {
+//         console.log(`Counter: ${i}`);
+//         this.userList.push({
+//             id: i+1,
+//             firstName: faker.name.firstName(),
+//             lastName: faker.name.lastName(),
+//             phone: faker.phone.phoneNumber(),
+//             state: faker.address.stateAbbr()
+//         }); 
+//     }
+//     getAll = function(){
+//         return this.userList;
+//     }
+// }
+
+
+
+// exports = module.exports = UserDts;

@@ -20,5 +20,5 @@ module.exports = function(app) {
     app.post('/api/signup', Authentication.signup);
     app.post('/api/signin', requireSignin, Authentication.signin);
     app.get('/api/users', Users.getusers);
-
+    app.get('/api/users/:id', Users.getuserById);
 }
